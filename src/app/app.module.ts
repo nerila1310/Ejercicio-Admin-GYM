@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase)
 
   ],
   providers: [],
