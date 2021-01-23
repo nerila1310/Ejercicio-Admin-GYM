@@ -14,15 +14,13 @@ export class AppComponent {
 
   constructor(public ofauth: AngularFireAuth){
     this.ofauth.user.subscribe((usuario)=>{
-      this.cargando = false;
-      this.usuario = usuario;
+      setTimeout(()=>{
+        this.cargando = false;
+        this.usuario = usuario;
+      },1000);
     })
   }
 
-  login() {
-    //this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    this.ofauth.signInWithEmailAndPassword('nerila1310@gmail.com','neri1310')
-  }
   logout() {
     this.ofauth.signOut();
   }
