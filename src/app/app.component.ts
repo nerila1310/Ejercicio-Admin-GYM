@@ -9,12 +9,11 @@ import firebase from 'firebase/app';
 })
 export class AppComponent {
   title = 'mastergym';
-  usuario!: firebase.User;
+  usuario!: firebase.User | null;
   cargando: boolean = true;
 
   constructor(public ofauth: AngularFireAuth){
     this.ofauth.user.subscribe((usuario)=>{
-      console.log(usuario)
       this.cargando = false;
       this.usuario = usuario;
     })
