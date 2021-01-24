@@ -18,9 +18,4 @@ export class AppComponent {
       this.usuario = usuario;
     })
   }
-
-  logout() {
-    this.ofauth.signOut();
-  }
-
 }
