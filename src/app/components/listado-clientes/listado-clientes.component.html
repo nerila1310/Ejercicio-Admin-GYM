@@ -8,42 +8,11 @@
     </form>
 
     <div class="row mt-2">
-        <div class="col-sm-3">
+        <div class="col-sm-3" *ngFor="let cliente of clientes" >
             <div class="card">
-                <img src="https://blog.gosocket.net/wp-content/uploads/2016/03/test1.png" class="card-img-top imgCliente" alt="...">
+                <img [src]="cliente.imgUrl" class="card-img-top imgCliente">
                 <div class="card-body">
-                    <h5 class="card-title">Neri Laredo</h5>
-                    <a href="#" class="card-link">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            
-            <div class="card">
-                <img src="https://s3-us-west-2.amazonaws.com/futuregamestudio/flat-faces-icons-circle-3.png" class="card-img-top imgCliente" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Diana Pérez</h5>
-                    <a href="#" class="card-link">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img src="https://blog.gosocket.net/wp-content/uploads/2016/03/test1.png" class="card-img-top imgCliente" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Diana Pérez</h5>
-                    <a href="#" class="card-link">Editar</a>
-                    <a href="#" class="card-link text-danger">Desactivar</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHTfj4rpfo35KCLe8P_QUcy_EThBOWFRo42w&usqp=CAU" class="card-img-top imgCliente" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Diana Pérez</h5>
+                    <h5 class="card-title">{{cliente.nombre}} {{cliente.apellido}}</h5>
                     <a href="#" class="card-link">Editar</a>
                     <a href="#" class="card-link text-danger">Desactivar</a>
                 </div>
