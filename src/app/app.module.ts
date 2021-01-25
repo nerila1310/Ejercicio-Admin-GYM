@@ -17,6 +17,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { EncabezadoComponent } from './components/encabezado/encabezado.component';
 import { ListadoClientesComponent } from './components/listado-clientes/listado-clientes.component';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AgregarClienteComponent } from './components/agregar-cliente/agregar-cliente.component';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AgregarClienteComponent } from './components/agregar-cliente/agregar-cl
     ProgressbarModule.forRoot(),
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     NgxSpinnerModule,
     FormsModule
 
