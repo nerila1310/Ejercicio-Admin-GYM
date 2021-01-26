@@ -4,7 +4,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MensajesService } from 'src/app/services/mensajes.service';
-import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-agregar-cliente',
