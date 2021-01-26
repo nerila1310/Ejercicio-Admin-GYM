@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-cliente',
@@ -13,11 +14,17 @@ export class AgregarClienteComponent implements OnInit {
   formularioCliente!: FormGroup;
   porcentaje: number | undefined = 0; 
   urlImagen: string = '';
+  id!: string;
+  esEditable: Boolean = false;
   
-  constructor( private fb: FormBuilder, private storage: AngularFireStorage, private afs: AngularFirestore) { }
+  constructor( 
+    private fb: FormBuilder, 
+    private storage: AngularFireStorage, 
+    private afs: AngularFirestore,
+    private activeRoute: ActivatedRoute,){ }
 
   ngOnInit(): void {
-
+    
     this.formularioCliente  = this.fb.group({
       nombre:['', Validators.required],
       apellido:['', Validators.required],
@@ -30,15 +37,37 @@ export class AgregarClienteComponent implements OnInit {
       telefono:[''],
       imgUrl: ['', Validators.required]
     })
+  
+    this.id = this.activeRoute.snapshot.params.clienteID;
+    if(this.id != undefined){
+      this.esEditable = true;
+      this.afs.doc<any>('clientes/'+this.id).valueChanges().subscribe((cliente)=>{
+        this.formularioCliente.setValue({
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          correo: cliente.correo,
+          curp: cliente.curp,
+          fechaNacimiento: new Date(cliente.fechaNacimiento.seconds*1000).toISOString().substr(0,10),
+          telefono: cliente.telefono,
+          imgUrl: ''
+        })
+        this.urlImagen = cliente.imgUrl;
+      })
+    }
   }
 
   agregar(){
+
     this.formularioCliente.value.imgUrl = this.urlImagen;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento)
-    console.log(this.formularioCliente.value);
-    this.afs.collection('clientes').add(this.formularioCliente.value).then((termino)=>{
-      console.log('Registro Completo')
-    })
+    this.afs.collection('clientes').add(this.formularioCliente.value).then((termino)=>{})
+  }
+
+  editar(){
+
+    this.formularioCliente.value.imgUrl = this.urlImagen;
+    this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento)
+    this.afs.doc('clientes/'+this.id).update(this.formularioCliente.value)
   }
 
   subirImagen(event: any){
@@ -60,9 +89,5 @@ export class AgregarClienteComponent implements OnInit {
         this.porcentaje = parseInt( porcentajeS.toString() );
       })
     }
-
-    
-    
   }
-
 }
