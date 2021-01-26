@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MensajesService } from 'src/app/services/mensajes.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-agregar-cliente',
@@ -21,7 +23,8 @@ export class AgregarClienteComponent implements OnInit {
     private fb: FormBuilder, 
     private storage: AngularFireStorage, 
     private afs: AngularFirestore,
-    private activeRoute: ActivatedRoute,){ }
+    private activeRoute: ActivatedRoute,
+    private mensaje: MensajesService){ }
 
   ngOnInit(): void {
     
@@ -60,14 +63,22 @@ export class AgregarClienteComponent implements OnInit {
 
     this.formularioCliente.value.imgUrl = this.urlImagen;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento)
-    this.afs.collection('clientes').add(this.formularioCliente.value).then((termino)=>{})
+    this.afs.collection('clientes').add(this.formularioCliente.value).then((termino)=>{
+      this.mensaje.mensajeCorrecto('Cliente Agregado', "Cliente agregado correctamente");
+    }).catch((error)=>{
+      this.mensaje.mensajeError('Error', "Error al agregar cliente");
+    })
   }
 
   editar(){
 
     this.formularioCliente.value.imgUrl = this.urlImagen;
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento)
-    this.afs.doc('clientes/'+this.id).update(this.formularioCliente.value)
+    this.afs.doc('clientes/'+this.id).update(this.formularioCliente.value).then((resutl)=>{
+      this.mensaje.mensajeCorrecto('Cliente Editado', "Cliente editado correctamente");
+    }).catch((error)=>{
+      this.mensaje.mensajeError('Error', "Error al editar cliente");
+    })
   }
 
   subirImagen(event: any){
