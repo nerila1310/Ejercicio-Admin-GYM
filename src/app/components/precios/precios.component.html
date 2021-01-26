@@ -3,32 +3,31 @@
         <div class="col-sm-7">
             <h4>Precios</h4>
             <ul>
-                <li>Suscipción semanal</li>
-                <li>Suscripción mensual</li>
+                <li *ngFor="let precio of precios">{{precio.nombre}}</li>
             </ul>    
         </div>
 
         <div class="col-sm-5">
             <h4>Agregar/Editar</h4>
-            <form action="">
+            <form [formGroup]="formularioPrecio" >
                 <div class="form-group">
                     <label for="">Nombre</label>
-                    <input type="text" class="form-control" name="" id="">
+                    <input formControlName="nombre" type="text" class="form-control" name="" id="">
                 </div>
 
                 <div class="form-group">
                     <label for="">Costo</label>
-                    <input type="number" class="form-control" name="" id="">
+                    <input formControlName="costo" type="number" class="form-control" name="" id="">
                 </div>
 
                 <div class="form-group">
                     <label for="">Duración</label>
-                    <input type="text" class="form-control" name="" id="">
+                    <input formControlName="duracion" type="text" class="form-control" name="" id="">
                 </div>
 
                 <div class="form-group">
                     <label for="">Tipo de duración</label>
-                    <select  class="form-control" name="" id="">
+                    <select formControlName="tipo" class="form-control" name="" id="">
                         <option value="1">Día</option>
                         <option value="2">Semana</option>
                         <option value="3">Quincena</option>
@@ -37,8 +36,8 @@
                     </select>
                 </div>
 
-                <button class="btn btn-primary">Agregar</button>
-                <button class="btn btn-danger ml-2">Editar</button>
+                <button class="btn btn-primary" [disabled]="formularioPrecio.invalid" (click)="agregar()">Agregar</button>
+                <button class="btn btn-danger ml-2" [disabled]="formularioPrecio.invalid" >Editar</button>
 
             </form>
         </div>

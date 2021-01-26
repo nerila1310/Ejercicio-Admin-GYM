@@ -65,7 +65,7 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento)
     this.afs.collection('clientes').add(this.formularioCliente.value).then((termino)=>{
       this.mensaje.mensajeCorrecto('Cliente Agregado', "Cliente agregado correctamente");
-      this.route.navigateByUrl('/listado-clientes')
+      this.formularioCliente.reset();
     }).catch((error)=>{
       this.mensaje.mensajeError('Error', "Error al agregar cliente");
     })
