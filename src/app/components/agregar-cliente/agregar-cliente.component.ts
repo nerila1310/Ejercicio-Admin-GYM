@@ -24,7 +24,8 @@ export class AgregarClienteComponent implements OnInit {
     private storage: AngularFireStorage, 
     private afs: AngularFirestore,
     private activeRoute: ActivatedRoute,
-    private mensaje: MensajesService){ }
+    private mensaje: MensajesService,
+    private route: Router){ }
 
   ngOnInit(): void {
     
@@ -65,6 +66,7 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento)
     this.afs.collection('clientes').add(this.formularioCliente.value).then((termino)=>{
       this.mensaje.mensajeCorrecto('Cliente Agregado', "Cliente agregado correctamente");
+      this.route.navigateByUrl('/listado-clientes')
     }).catch((error)=>{
       this.mensaje.mensajeError('Error', "Error al agregar cliente");
     })
@@ -76,6 +78,7 @@ export class AgregarClienteComponent implements OnInit {
     this.formularioCliente.value.fechaNacimiento = new Date(this.formularioCliente.value.fechaNacimiento)
     this.afs.doc('clientes/'+this.id).update(this.formularioCliente.value).then((resutl)=>{
       this.mensaje.mensajeCorrecto('Cliente Editado', "Cliente editado correctamente");
+      this.route.navigateByUrl('/listado-clientes')
     }).catch((error)=>{
       this.mensaje.mensajeError('Error', "Error al editar cliente");
     })
