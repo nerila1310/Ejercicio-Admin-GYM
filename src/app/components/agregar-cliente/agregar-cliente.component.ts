@@ -98,7 +98,7 @@ export class AgregarClienteComponent implements OnInit {
           this.urlImagen = url;
         })
       })
-      tarea.percentageChanges().subscribe((porcentajeS)=>{
+      tarea.percentageChanges().subscribe((porcentajeS: any)=>{
         this.porcentaje = parseInt( porcentajeS.toString() );
       })
     }
