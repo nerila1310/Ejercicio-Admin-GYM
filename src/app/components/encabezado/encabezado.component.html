@@ -9,11 +9,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" dropdown >  
                 <li class="nav-item active">
-                    <a class="nav-link active" aria-current="page" href="#">Inscripción</a>
+                    <a class="nav-link active" aria-current="page" routerLink="/" >Inscripción</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink='/'>Ver Inscripciones</a>
+                    <a class="nav-link active" aria-current="page" routerLink="/listado-inscripciones">Ver Inscripciones</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -33,23 +33,6 @@
 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" routerLink="/precios">Precios</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <div class="btn-group" dropdown>
-                        <button id="button-basic" dropdownToggle type="button" class="btn btn-dark dropdown-toggle"
-                                aria-controls="dropdown-basic">
-                          Reportes <span class="caret"></span>
-                        </button>
-                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                            role="menu" aria-labelledby="button-basic">
-                          <li role="menuitem"><a class="dropdown-item" href="#">Suscripciones Diarias</a></li>
-                          <li class="divider dropdown-divider"></li>
-                          <li role="menuitem"><a class="dropdown-item" href="#">Suscripciones Mensuales</a></li>
-                          <li class="divider dropdown-divider"></li>
-                          <li role="menuitem"><a class="dropdown-item" href="#">Mas Vendidaas</a></li>
-                        </ul>
-                      </div>
                 </li>
             </ul>
         </div>
