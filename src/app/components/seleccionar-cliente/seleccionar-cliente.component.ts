@@ -49,7 +49,7 @@ export class SeleccionarClienteComponent implements OnInit {
     this.seleccionoCliente.emit(cliente)
   }
 
-  cancelarCliente(){
+  cancelarClientehtml(){
     this.nombre = undefined;
     this.cancelarCliente.emit();
   }

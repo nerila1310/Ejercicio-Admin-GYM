@@ -42,61 +42,76 @@ export class InscipcionComponent implements OnInit {
   }
 
   guardar(){
-    console.log(this.inscripcion)
+    if(this.inscripcion.validar().esValido){
+      console.log('Guardando....') 
+    }else{
+      console.log(this.inscripcion.validar().mensaje)
+    }
   }
 
   seleccionarPrecio(id: string){
-    this.precioSeleccionado = this.precios.find(x => x.id == id)
-    this.inscripcion.precios = this.precioSeleccionado.ref
-    this.inscripcion.fecha = new Date();
 
-    this.inscripcion.subtotal = this.precioSeleccionado.costo;
-    this.inscripcion.impuesto = this.inscripcion.subtotal * 0.16;
-    this.inscripcion.total = this.inscripcion.subtotal + this.inscripcion.impuesto;
+    if(id != 'null'){
 
-    if(this.precioSeleccionado.tipo == 1){
+      this.precioSeleccionado = this.precios.find(x => x.id == id)
+      this.inscripcion.precios = this.precioSeleccionado.ref
+      this.inscripcion.fecha = new Date();
+  
+      this.inscripcion.subtotal = this.precioSeleccionado.costo;
+      this.inscripcion.impuesto = this.inscripcion.subtotal * 0.16;
+      this.inscripcion.total = this.inscripcion.subtotal + this.inscripcion.impuesto;
+  
+      if(this.precioSeleccionado.tipo == 1){
+  
+        let dias: number = this.precioSeleccionado.duracion * 1;
+        let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate()+dias)
+        this.inscripcion.fechaFinal = fechaFinal;
+      }
+  
+      if(this.precioSeleccionado.tipo == 2){
+  
+        let dias: number = this.precioSeleccionado.duracion * 7;
+        let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate()+dias)
+        this.inscripcion.fechaFinal = fechaFinal;
+      }
+  
+      if(this.precioSeleccionado.tipo == 3){
+  
+        let dias: number = this.precioSeleccionado.duracion * 15;
+        let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate()+dias)
+        this.inscripcion.fechaFinal = fechaFinal;
+      }
+  
+      if(this.precioSeleccionado.tipo == 4){
+  
+        let mesAgrega: number = this.precioSeleccionado.duracion;
+        let anio: number = this.inscripcion.fecha.getFullYear()
+        let mes: number = this.inscripcion.fecha.getMonth() + mesAgrega
+        let dia: number = this.inscripcion.fecha.getDate()
+  
+        let fechaFinal = new Date(anio, mes , dia )
+        this.inscripcion.fechaFinal = fechaFinal;
+      }
+  
+      if(this.precioSeleccionado.tipo == 5){
+  
+        let anioAgrega: number = this.precioSeleccionado.duracion * 1;
+        let mes: number = this.inscripcion.fecha.getMonth() 
+        let dia: number = this.inscripcion.fecha.getDate()
+  
+        let fechaFinal = new Date(this.inscripcion.fecha.getFullYear() + anioAgrega , mes , dia )
+        this.inscripcion.fechaFinal = fechaFinal;
+  
+      }
+    }else{
+      this.precioSeleccionado = new Precio();
 
-      let dias: number = this.precioSeleccionado.duracion * 1;
-      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate()+dias)
-      this.inscripcion.fechaFinal = fechaFinal;
+      this.inscripcion.precios = null;
+      this.inscripcion.fecha = null;
+      this.inscripcion.fechaFinal = null;
+      this.inscripcion.subtotal = 0;
+      this.inscripcion.impuesto = 0;
+      this.inscripcion.total = 0;
     }
-
-    if(this.precioSeleccionado.tipo == 2){
-
-      let dias: number = this.precioSeleccionado.duracion * 7;
-      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate()+dias)
-      this.inscripcion.fechaFinal = fechaFinal;
-    }
-
-    if(this.precioSeleccionado.tipo == 3){
-
-      let dias: number = this.precioSeleccionado.duracion * 15;
-      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate()+dias)
-      this.inscripcion.fechaFinal = fechaFinal;
-    }
-
-    if(this.precioSeleccionado.tipo == 4){
-
-      let mesAgrega: number = this.precioSeleccionado.duracion;
-      let anio: number = this.inscripcion.fecha.getFullYear()
-      let mes: number = this.inscripcion.fecha.getMonth() + mesAgrega
-      let dia: number = this.inscripcion.fecha.getDate()
-
-      let fechaFinal = new Date(anio, mes , dia )
-      this.inscripcion.fechaFinal = fechaFinal;
-    }
-
-    if(this.precioSeleccionado.tipo == 5){
-
-      let anioAgrega: number = this.precioSeleccionado.duracion * 1;
-      let mes: number = this.inscripcion.fecha.getMonth() 
-      let dia: number = this.inscripcion.fecha.getDate()
-
-      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear() + anioAgrega , mes , dia )
-      this.inscripcion.fechaFinal = fechaFinal;
-
-    }
-
   }
-
 }
