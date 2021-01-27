@@ -50,6 +50,10 @@ export class InscipcionComponent implements OnInit {
     this.inscripcion.precios = this.precioSeleccionado.ref
     this.inscripcion.fecha = new Date();
 
+    this.inscripcion.subtotal = this.precioSeleccionado.costo;
+    this.inscripcion.impuesto = this.inscripcion.subtotal * 0.16;
+    this.inscripcion.total = this.inscripcion.subtotal + this.inscripcion.impuesto;
+
     if(this.precioSeleccionado.tipo == 1){
 
       let dias: number = this.precioSeleccionado.duracion * 1;
@@ -90,14 +94,9 @@ export class InscipcionComponent implements OnInit {
 
       let fechaFinal = new Date(this.inscripcion.fecha.getFullYear() + anioAgrega , mes , dia )
       this.inscripcion.fechaFinal = fechaFinal;
+
     }
 
-
-                        // <option value="1">Día</option>
-                        // <option value="2">Semana</option>
-                        // <option value="3">Quincena</option>
-                        // <option value="4">Mensual</option>
-                        // <option value="5">Año</option>
   }
 
 }
