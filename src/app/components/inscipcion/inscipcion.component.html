@@ -1,9 +1,22 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-sm-6">
-            <app-seleccionar-cliente [nombre]="clienteSeleccionado.nombre" (cancelarCliente)="eliminarCliente()" (seleccionoCliente)="asignarCliente($event)"></app-seleccionar-cliente>
             
-            <button class="btn btn-primary" (click)="guardar()">Guardar</button>
+            <app-seleccionar-cliente 
+                [nombre]="clienteSeleccionado.nombre" 
+                (cancelarCliente)="eliminarCliente()" 
+                (seleccionoCliente)="asignarCliente($event)">
+            </app-seleccionar-cliente>
+            
+            <div>
+                <label for="">Precio</label>
+                <select class="form-control" name="" id="">
+                    <option *ngFor="let precio of precios" value="">{{precio.nombre}}</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary mt-3" (click)="guardar()">Guardar</button>
+            
         </div>
         <div class="col-sm-6">
             segundos
