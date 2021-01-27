@@ -21,6 +21,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AgregarClienteComponent } from './components/agregar-cliente/agregar-cliente.component';
 import { MensajesService } from './services/mensajes.service';
 import { PreciosComponent } from './components/precios/precios.component';
+import { InscipcionComponent } from './components/inscipcion/inscipcion.component';
+import { SeleccionarClienteComponent } from './components/seleccionar-cliente/seleccionar-cliente.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { PreciosComponent } from './components/precios/precios.component';
     ListadoClientesComponent,
     AgregarClienteComponent,
     PreciosComponent,
+    InscipcionComponent,
+    SeleccionarClienteComponent,
   ],
   imports: [
     BrowserModule,
