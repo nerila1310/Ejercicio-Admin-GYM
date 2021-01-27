@@ -1,14 +1,13 @@
 <div class="clientes">
     <div class="form-group">
         <label for="">Cliente</label>
-        <input class="form-control" type="text" placeholder="Seleccione un cliente">
+        <input class="form-control" (input)="buscarCliente($event.target.value)" type="text" placeholder="Seleccione un cliente">
     </div>
     <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-          Cliente 1
-        </a>
-        <a *ngFor="let cliente of clientes" class="list-group-item list-group-item-action">
+      <div *ngFor="let cliente of clientes">
+        <a *ngIf="cliente.visible" class="list-group-item list-group-item-action">
           {{cliente.nombre}} {{cliente.apellido}}
         </a>
-      </div>
+      </div>    
+    </div>
 </div>

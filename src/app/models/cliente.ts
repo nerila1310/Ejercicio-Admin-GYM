@@ -10,4 +10,5 @@ export class Cliente{
     imgUrl: string;
     telefono: string;
     ref: DocumentReference;
+    visible: boolean;
 }
