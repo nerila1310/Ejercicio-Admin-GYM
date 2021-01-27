@@ -48,6 +48,56 @@ export class InscipcionComponent implements OnInit {
   seleccionarPrecio(id: string){
     this.precioSeleccionado = this.precios.find(x => x.id == id)
     this.inscripcion.precios = this.precioSeleccionado.ref
+    this.inscripcion.fecha = new Date();
+
+    if(this.precioSeleccionado.tipo == 1){
+
+      let dias: number = this.precioSeleccionado.duracion * 1;
+      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate()+dias)
+      this.inscripcion.fechaFinal = fechaFinal;
+    }
+
+    if(this.precioSeleccionado.tipo == 2){
+
+      let dias: number = this.precioSeleccionado.duracion * 7;
+      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate()+dias)
+      this.inscripcion.fechaFinal = fechaFinal;
+    }
+
+    if(this.precioSeleccionado.tipo == 3){
+
+      let dias: number = this.precioSeleccionado.duracion * 15;
+      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear(), this.inscripcion.fecha.getMonth(), this.inscripcion.fecha.getDate()+dias)
+      this.inscripcion.fechaFinal = fechaFinal;
+    }
+
+    if(this.precioSeleccionado.tipo == 4){
+
+      let mesAgrega: number = this.precioSeleccionado.duracion;
+      let anio: number = this.inscripcion.fecha.getFullYear()
+      let mes: number = this.inscripcion.fecha.getMonth() + mesAgrega
+      let dia: number = this.inscripcion.fecha.getDate()
+
+      let fechaFinal = new Date(anio, mes , dia )
+      this.inscripcion.fechaFinal = fechaFinal;
+    }
+
+    if(this.precioSeleccionado.tipo == 5){
+
+      let anioAgrega: number = this.precioSeleccionado.duracion * 1;
+      let mes: number = this.inscripcion.fecha.getMonth() 
+      let dia: number = this.inscripcion.fecha.getDate()
+
+      let fechaFinal = new Date(this.inscripcion.fecha.getFullYear() + anioAgrega , mes , dia )
+      this.inscripcion.fechaFinal = fechaFinal;
+    }
+
+
+                        // <option value="1">Día</option>
+                        // <option value="2">Semana</option>
+                        // <option value="3">Quincena</option>
+                        // <option value="4">Mensual</option>
+                        // <option value="5">Año</option>
   }
 
 }
